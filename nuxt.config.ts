@@ -7,6 +7,7 @@ export default defineNuxtConfig({
     '~/assets/css/atoms/__responsive.scss'
   ],
   app: {
+    baseURL: process.env.NUXT_APP_BASE_URL || '/',
     head: {
       htmlAttrs: { lang: 'ru' },
       title: 'Тортики от Анастасии — Симферополь',
@@ -21,6 +22,9 @@ export default defineNuxtConfig({
   nitro: {
     externals: {
       inline: ['swiper', 'vue']
+    },
+    prerender: {
+      routes: ['/', '/privacy']
     }
   }
 })

@@ -5,6 +5,8 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 
 const swiperModules = [Pagination, Navigation, A11y]
+const appBaseURL = useRuntimeConfig().app.baseURL
+const withBase = (path: string) => `${appBaseURL}${path.replace(/^\/+/, '')}`
 const fillingType = ref<'bento' | 'cake'>('bento')
 const priceType = ref<'bento' | 'cake' | 'dessert'>('bento')
 const selectedImage = ref<string | null>(null)
@@ -108,7 +110,7 @@ onBeforeUnmount(() => document.body.classList.remove('is-overlay-open'))
             @click="closeMenu"
           >
             {{ label }}
-            <span class="drawer__arrow"><img src="/icons/arrow-right.svg" alt=""></span>
+            <span class="drawer__arrow"><img :src="withBase('/icons/arrow-right.svg')" alt=""></span>
           </a>
         </nav>
         <a class="drawer__cta button" href="#contacts" @click="closeMenu">Заказать торт</a>
@@ -134,7 +136,7 @@ onBeforeUnmount(() => document.body.classList.remove('is-overlay-open'))
       <div class="hero__body container">
         <p class="hero__eyebrow eyebrow">Симферополь · с любовью</p>
         <div class="hero__portrait">
-          <img class="hero__image" src="/images/owner-hero-square-v2.png" width="1254" height="1254" alt="Анастасия с праздничным тортом">
+          <img class="hero__image" :src="withBase('/images/owner-hero-square-v2.png')" width="1254" height="1254" alt="Анастасия с праздничным тортом">
           <span class="hero__flames" aria-hidden="true">
             <i class="hero__flame hero__flame--one" />
             <i class="hero__flame hero__flame--two" />
@@ -145,9 +147,9 @@ onBeforeUnmount(() => document.body.classList.remove('is-overlay-open'))
           <h1 class="hero__title">Вкусные<br>торты</h1>
           <p class="hero__lead">Из муки, сахара и нежности</p>
           <div class="hero__actions">
-            <a href="#fillings" class="button">Выбрать торт <img src="/icons/arrow-right.svg" alt=""></a>
-            <a class="social-button" href="https://t.me/anastasia_nik5" target="_blank" rel="noopener noreferrer" aria-label="Telegram Анастасии"><Icon name="mdi:telegram" aria-hidden="true" /></a>
-            <a class="social-button" href="https://instagram.com/anastasiia.cake.simf" target="_blank" rel="noopener noreferrer" aria-label="Instagram Анастасии*"><Icon name="mdi:instagram" aria-hidden="true" /></a>
+            <a href="#fillings" class="button">Выбрать торт <img :src="withBase('/icons/arrow-right.svg')" alt=""></a>
+            <a class="social-button" href="https://t.me/anastasia_nik5" target="_blank" rel="noopener noreferrer" aria-label="Telegram Анастасии"><img :src="withBase('/icons/telegram.svg')" alt="" aria-hidden="true" /></a>
+            <a class="social-button" href="https://instagram.com/anastasiia.cake.simf" target="_blank" rel="noopener noreferrer" aria-label="Instagram Анастасии*"><img :src="withBase('/icons/instagram.svg')" alt="" aria-hidden="true" /></a>
           </div>
         </div>
       </div>
@@ -172,14 +174,14 @@ onBeforeUnmount(() => document.body.classList.remove('is-overlay-open'))
               <SwiperSlide v-for="filling in fillings[fillingType]" :key="filling.name">
                 <article class="filling-card" :class="`filling-card--${filling.tone}`">
                   <div class="filling-card__copy"><h3>{{ filling.name }}</h3><p>{{ filling.note }}</p></div>
-                  <img class="filling-card__image" :src="filling.image" :alt="`Кусочек торта «${filling.name}»`">
+                  <img class="filling-card__image" :src="withBase(filling.image)" :alt="`Кусочек торта «${filling.name}»`">
                 </article>
               </SwiperSlide>
             </Swiper>
           </Transition>
           <div class="slider-controls fillings__controls" aria-label="Управление слайдером начинок">
-            <button class="slider-controls__button slider-controls__button--prev fillings__slider-prev" type="button" aria-label="Предыдущая начинка"><img src="/icons/arrow-right.svg" alt=""></button>
-            <button class="slider-controls__button slider-controls__button--next fillings__slider-next" type="button" aria-label="Следующая начинка"><img src="/icons/arrow-right.svg" alt=""></button>
+            <button class="slider-controls__button slider-controls__button--prev fillings__slider-prev" type="button" aria-label="Предыдущая начинка"><img :src="withBase('/icons/arrow-right.svg')" alt=""></button>
+            <button class="slider-controls__button slider-controls__button--next fillings__slider-next" type="button" aria-label="Следующая начинка"><img :src="withBase('/icons/arrow-right.svg')" alt=""></button>
           </div>
         </div>
       </div>
@@ -205,13 +207,13 @@ onBeforeUnmount(() => document.body.classList.remove('is-overlay-open'))
               </div>
             </Transition>
           </div>
-          <a class="price-download button" href="/price-list.pdf" target="_blank" rel="noopener">Скачать прайслист <img src="/icons/arrow-right.svg" alt=""></a>
+          <a class="price-download button" :href="withBase('/price-list.pdf')" target="_blank" rel="noopener">Скачать прайслист <img :src="withBase('/icons/arrow-right.svg')" alt=""></a>
         </div>
         <div class="pricing__desktop">
           <div class="pricing__desktop-intro">
             <p class="eyebrow">Прайс</p>
             <h2>Выберите<br>свой повод</h2>
-            <a class="price-download button" href="/price-list.pdf" target="_blank" rel="noopener">Скачать прайслист <img src="/icons/arrow-right.svg" alt=""></a>
+            <a class="price-download button" :href="withBase('/price-list.pdf')" target="_blank" rel="noopener">Скачать прайслист <img :src="withBase('/icons/arrow-right.svg')" alt=""></a>
           </div>
           <div class="pricing__desktop-selection">
             <div class="pricing__tabs tabs tabs--three" role="tablist" aria-label="Категория прайса">
@@ -242,14 +244,14 @@ onBeforeUnmount(() => document.body.classList.remove('is-overlay-open'))
           <Swiper class="works__slider swiper-instance" :modules="swiperModules" :slides-per-view="1.1" :space-between="11" :pagination="{ clickable: true }" :navigation="{ prevEl: '.works__slider-prev', nextEl: '.works__slider-next' }" :breakpoints="{ 768: { slidesPerView: 2.1 }, 1024: { slidesPerView: 3 } }">
             <SwiperSlide v-for="work in works" :key="work.title">
               <button class="work-card" type="button" @click="selectedImage = work.image">
-                <img class="work-card__image" :src="work.image" :alt="work.title">
+                <img class="work-card__image" :src="withBase(work.image)" :alt="work.title">
                 <span class="work-card__caption"><b>{{ work.title }}</b><small>{{ work.caption }}</small></span>
               </button>
             </SwiperSlide>
           </Swiper>
           <div class="slider-controls works__controls" aria-label="Управление слайдером примеров работ">
-            <button class="slider-controls__button slider-controls__button--prev works__slider-prev" type="button" aria-label="Предыдущая работа"><img src="/icons/arrow-right.svg" alt=""></button>
-            <button class="slider-controls__button slider-controls__button--next works__slider-next" type="button" aria-label="Следующая работа"><img src="/icons/arrow-right.svg" alt=""></button>
+            <button class="slider-controls__button slider-controls__button--prev works__slider-prev" type="button" aria-label="Предыдущая работа"><img :src="withBase('/icons/arrow-right.svg')" alt=""></button>
+            <button class="slider-controls__button slider-controls__button--next works__slider-next" type="button" aria-label="Следующая работа"><img :src="withBase('/icons/arrow-right.svg')" alt=""></button>
           </div>
         </div>
       </div>
@@ -266,7 +268,7 @@ onBeforeUnmount(() => document.body.classList.remove('is-overlay-open'))
             <li>По Симферополю привезу торт <strong class="delivery__paid">за доплату</strong></li>
           </ul>
         </div>
-        <div class="car-scene"><img src="/images/delivery-car-cake.png" alt="Автомобиль с праздничным тортом для доставки"></div>
+        <div class="car-scene"><img :src="withBase('/images/delivery-car-cake.png')" alt="Автомобиль с праздничным тортом для доставки"></div>
       </div>
     </section>
 
@@ -280,14 +282,14 @@ onBeforeUnmount(() => document.body.classList.remove('is-overlay-open'))
           <Swiper class="reviews__slider swiper-instance" :modules="swiperModules" :slides-per-view="1.05" :space-between="11" :pagination="{ clickable: true }" :navigation="{ prevEl: '.reviews__slider-prev', nextEl: '.reviews__slider-next' }" :breakpoints="{ 768: { slidesPerView: 1.6 }, 1024: { slidesPerView: 2.4 } }">
             <SwiperSlide v-for="review in reviews" :key="review.author">
               <article class="review-card">
-                <img class="review-card__image" :src="review.image" alt="Фото торта из отзыва">
+                <img class="review-card__image" :src="withBase(review.image)" alt="Фото торта из отзыва">
                 <div class="review-card__copy"><q>{{ review.text }}</q><small>{{ review.author }}</small></div>
               </article>
             </SwiperSlide>
           </Swiper>
           <div class="slider-controls reviews__controls" aria-label="Управление слайдером отзывов">
-            <button class="slider-controls__button slider-controls__button--prev reviews__slider-prev" type="button" aria-label="Предыдущий отзыв"><img src="/icons/arrow-right.svg" alt=""></button>
-            <button class="slider-controls__button slider-controls__button--next reviews__slider-next" type="button" aria-label="Следующий отзыв"><img src="/icons/arrow-right.svg" alt=""></button>
+            <button class="slider-controls__button slider-controls__button--prev reviews__slider-prev" type="button" aria-label="Предыдущий отзыв"><img :src="withBase('/icons/arrow-right.svg')" alt=""></button>
+            <button class="slider-controls__button slider-controls__button--next reviews__slider-next" type="button" aria-label="Следующий отзыв"><img :src="withBase('/icons/arrow-right.svg')" alt=""></button>
           </div>
         </div>
       </div>
@@ -305,14 +307,14 @@ onBeforeUnmount(() => document.body.classList.remove('is-overlay-open'))
             <a class="contacts__link" href="https://instagram.com/anastasiia.cake.simf" target="_blank" rel="noopener noreferrer">Instagram* @anastasiia.cake.simf</a>
           </nav>
         </div>
-        <div class="contacts__art" aria-hidden="true"><img src="/images/contacts-cake-illustration.png" alt=""></div>
+        <div class="contacts__art" aria-hidden="true"><img :src="withBase('/images/contacts-cake-illustration.png')" alt=""></div>
       </div>
     </section>
 
     <footer class="site-footer">
       <span class="site-footer__copyright">© Тортики от Анастасии, 2026</span>
       <span class="site-footer__made-with-love">Сделано с любовью ♡</span>
-      <a class="site-footer__policy footer__policy" href="/privacy">Политика обработки данных</a>
+      <a class="site-footer__policy footer__policy" :href="withBase('/privacy')">Политика обработки данных</a>
       <small class="site-footer__notice footer__notice">* Instagram принадлежит Meta Platforms Inc., признанной экстремистской организацией; её деятельность запрещена на территории РФ.</small>
     </footer>
   </main>
@@ -320,7 +322,7 @@ onBeforeUnmount(() => document.body.classList.remove('is-overlay-open'))
   <Teleport to="body">
     <div v-if="selectedImage" class="lightbox" role="dialog" aria-modal="true" aria-label="Просмотр фотографии" @click.self="selectedImage = null">
       <button class="lightbox__close" type="button" aria-label="Закрыть" @click="selectedImage = null">×</button>
-      <img class="lightbox__image" :src="selectedImage" alt="Работа Анастасии">
+      <img class="lightbox__image" :src="selectedImage ? withBase(selectedImage) : undefined" alt="Работа Анастасии">
     </div>
   </Teleport>
 </template>

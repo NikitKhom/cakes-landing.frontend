@@ -1,7 +1,12 @@
+<script setup lang="ts">
+const appBaseURL = useRuntimeConfig().app.baseURL
+const withBase = (path: string) => `${appBaseURL}${path.replace(/^\/+/, '')}`
+</script>
+
 <template>
   <main class="privacy-page">
     <div class="privacy-page__inner">
-      <a class="privacy-page__back" href="/"><img src="/icons/arrow-right.svg" alt=""> На главную</a>
+      <a class="privacy-page__back" :href="withBase('/')"><img :src="withBase('/icons/arrow-right.svg')" alt=""> На главную</a>
       <p class="eyebrow">Документы</p>
       <h1>Политика обработки персональных данных</h1>
       <p class="privacy-page__updated">Дата публикации: 22 октября 2026 года</p>
@@ -27,7 +32,7 @@
         <p>По вопросам, связанным с размещённой информацией и обработкой данных, можно связаться с Анастасией по телефону или через Telegram, указанным на главной странице.</p>
       </section>
 
-      <a class="button privacy-page__button" href="/">Вернуться на сайт</a>
+      <a class="button privacy-page__button" :href="withBase('/')">Вернуться на сайт</a>
     </div>
   </main>
 </template>
