@@ -1,13 +1,8 @@
-# cakes-landing.frontend
+# Тортики от Анастасии
 
-Лендинг частного кондитера Анастасии на Nuxt.
-
-## Разработка
+Nuxt 4 frontend. Страница находится в `app/pages/index.vue`, стили — в `app/assets/css/atoms/__atoms.scss`, изображения — в `public/images`.
 
 ```powershell
-cd tortiki-nuxt
 npm install
 npm run dev
 ```
-
-Основная страница находится в `tortiki-nuxt/app/pages/index.vue`, стили — в `tortiki-nuxt/app/assets/css/atoms/`, изображения и прайс-лист — в `tortiki-nuxt/public/`.
