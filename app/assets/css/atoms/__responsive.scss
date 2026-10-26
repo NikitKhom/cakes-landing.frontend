@@ -826,3 +826,10 @@ section[id] {
     color: #a95067;
   }
 }
+
+@media (max-width: 43.6875rem) {
+  .contacts {
+    padding-top: 3rem;
+    padding-bottom: 0;
+  }
+}
